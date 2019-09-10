@@ -13,9 +13,9 @@ Two datasets are available at https://drive.google.com/file/d/18-JOCIj9v5bZCrn9C
 ***************************************************************
 
 ## Requirements
-* Ubuntu 16.0.4
-* Python 3.5
-* Pytorch 0.3.1
+* Ubuntu 16.0.4 -> mac OS
+* Python 3.5 ->3.6.5
+* Pytorch 0.3.1 ->0.4.0
 
 ***************************************************************
 

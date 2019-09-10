@@ -43,10 +43,10 @@ def cross_entropy_loss(hidden_outputs, decoder, targets, criterion, config, sim_
     scores = decoder.compute_score(outputs)
     loss = criterion(scores, targets.view(-1)) + sim_score
     pred = scores.max(1)[1]
-    num_correct = pred.data.eq(targets.data).masked_select(targets.ne(dict.PAD).data).sum()
+    num_correct = pred.data.eq(targets.data.reshape(-1)).masked_select(targets.ne(dict.PAD).data.reshape(-1)).sum()
     num_total = targets.ne(dict.PAD).data.sum()
     loss.div(num_total).backward()
-    loss = loss.data[0]
+    loss = loss.item()
 
     return loss, num_total, num_correct, config.tgt_vocab, config.tgt_vocab
 

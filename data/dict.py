@@ -120,7 +120,7 @@ class Dict(object):
             newDict.addSpecial(self.idxToLabel[i])
 
         for i in idx[:size]:
-            newDict.add(self.idxToLabel[i])
+            newDict.add(self.idxToLabel[i.item()])
 
         return newDict
 
@@ -147,6 +147,7 @@ class Dict(object):
         labels = []
 
         for i in idx:
+            i = i.item()
             if i == stop:
                 break
             labels += [self.getLabel(i)]

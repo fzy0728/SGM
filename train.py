@@ -142,10 +142,11 @@ scores = collections.OrderedDict(zip(config.metric, scores))
 
 with open(opt.label_dict_file, 'r') as f:
     label_dict = json.load(f)
-
+e = None
 # train
 def train(epoch):
-    e = epoch
+    global e, updates, total_loss, start_time, report_total
+    e = epoch 
     model.train()
 
     if config.schedule:
@@ -154,8 +155,6 @@ def train(epoch):
 
     if opt.model == 'gated': 
         model.current_epoch = epoch
-
-    global e, updates, total_loss, start_time, report_total
 
     for raw_src, src, src_len, raw_tgt, tgt, tgt_len in trainloader:
 
@@ -208,11 +207,11 @@ def eval(epoch):
         else:
             samples, alignment = model.beam_sample(src, src_len, beam_size=config.beam_size)
 
+
         candidate += [tgt_vocab.convertToLabels(s, dict.EOS) for s in samples]
         source += raw_src
         reference += raw_tgt
         alignments += [align for align in alignment]
-
     if opt.unk:
         cands = []
         for s, c, align in zip(source, candidate, alignments):
